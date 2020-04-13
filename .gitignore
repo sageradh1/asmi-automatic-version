@@ -1,6 +1,6 @@
 .startingenv
 migration
-project1_env
+autoenv
 .vscode
 \_\_pycache\_\_
 darkflowDirectory

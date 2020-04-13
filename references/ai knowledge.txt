@@ -1,0 +1,185 @@
+Difference while saving files in Keras:
+	model.save()          : saves the weights and the model structure to a single HDF5 file.
+	model.save_weights()  : only saves the weights to HDF5 and nothing else.
+
+
+Suppose we have directory structure as package1/package2/package3/pythonfile.py
+While importing modules from package3 level when we are at package1 level, we can do:
+	from package2.package3.pythonfile.py import requiredFunction
+
+But when we have to go one step above the directory level
+Example: When we have to mport modules from package1 level(i.e package1/pythonfile.py) when we are at package2 level, then we can use:
+	import sys
+	sys.path.append("..")
+	from package1.pythonfile.py import requiredFunction
+
+
+Another way to install Darkflow globally
+	1. Clone the Darkflow repo wherever you want it to be
+	2. cd to that directory
+	3. pip install .
+
+	After doing that you may need some hacks .for example:
+		a. While loading options for TFNET
+			import os
+			
+			basedir = os.path.abspath(os.path.dirname(__file__))
+
+		    options = {
+		        "model": basedir+"/cfg/yolo.cfg", 
+		        "load": basedir+"/bin/yolov2.weights", 
+		        "threshold": 0.1
+		        }
+		    
+		    tfnet = TFNet(options) 
+
+
+		b. While loading coco sets
+	        file = "/home/sagar/workingDir/projectversion1/app/darkflowMerge/cfg/coco.names"
+
+	        with open(file, 'r') as f:
+
+
+
+Matrices that contain mostly zero values are called sparse and 
+Matrices where most of the values are non-zero called dense.
+
+CSR = Compressed Sparse Row. The sparse matrix is represented using three one-dimensional 	arrays for the non-zero values, the extents of the rows, and the column indexes.
+CSC = Compressed Sparse Column. The same as the Compressed Sparse Row method except the 	column indices are compressed and read first before the row indices.
+
+RBM
+1. Bolzman Machine has only input and hidden layer no output layer.
+2. All the nodes are connected with all other nodes.
+3. In RBM, the nodes of same layer are not connected with eachother.
+4. Multiple RBMs can also be stacked and can be fine-tuned through the process of 			gradient descent and back-propagation. Such a network is called a Deep Belief Network
+5. They are used less, most people in the deep-learning community have started replacing 
+    their use with General Adversarial Networks or Variational Autoencoders.
+6. RBM is a Stochastic Neural Network which means that each neuron will have some random 
+	behavior when activated.
+7. Invented by Geoffrey Hinton, a Restricted Boltzmann machine is an algorithm useful for 
+	dimensionality reduction, classification, regression, collaborative filtering, feature learning and topic modeling.
+8. The increased popularity of Restricted Boltzmann Machines for computer vision is due 
+	partly to their excellent ability in feature extraction.
+
+
+Kernals are nothing but function for computing dot product between two vectors.
+Kernals are generally used with SVM during dimensionality reduction.
+Kernals are useful because Kernels give a way to compute dot products in some feature space without even knowing what this space is and what is φ.
+
+
+
+Suppose we have a mapping φ:Rn→Rm that brings our vectors in Rn(in n dimension) to some feature space Rm(in m dimension). Then the dot product of x and y in this space is φ(x)Tφ(y). A kernel is a function k that corresponds to this dot product, i.e. k(x,y)=φ(x)Tφ(y)
+
+
+
+Difference between tf.Variables and tf.placeholder:
+	tf.Variable is used for trainable variables such as weights (W) and biases (B) for your model.They WILL BE UPDATED CONSTANTLY DURING training.
+
+	tf.placeholder is used to feed actual training examples.These variables will be used as a training example so we can say that they will be used to update tf.Variable.
+
+
+ Tokenize = assigning distinct number to each words from the whole sentence
+ 	it tokenizes the total text (gives distinct number to distinct word of whole text corpus)
+
+Genereal principles for recommendation systems :
+	1. Content-Based Filtering
+		* Based on similarity(if you like something, then you will like something similar as well )
+		* Important terms:
+			a. Term Frequency (TF) = ratio of 
+				(number of times the word appears in a document) to 
+				(the total number of words in that document)
+
+			b. Inverse Document Frequency (IDF) = log(N/df)
+					where N= total number of documents in a collection
+						df = total number of documents that contains the term
+
+				Helps to calculate the importance of a word.Because if a word appears more , then the information it gives is reduced.
+				It is used to calculate the weight of rare words across all documents in the corpus. The words that occur rarely in the corpus have a high IDF score. It is given by the equation below.
+
+			c.  TF-IDF = TF * IDF
+				TFIDF score negates the effect of high frequency words in determining the importance of an item (document).
+
+	2. Memory-Based Collaborative Filtering
+		* Based on the past behavior of all the users. It also works on similarity but uses preferences and choices of two or more users for recommending. It analyses how similar the tastes of one user is to another and makes recommendations on the basis of that.
+		For instance, if user A likes movies 1, 2, 3 and user B likes movies 2,3,4, then they have similar interests and A should like movie 4 and B should like movie 1. This makes it one of the most commonly used algorithm as it is not dependent on any additional information.
+
+	3. Model-Based Collaborative Filtering
+		* Model-based Collaborative Filtering is based on matrix factorization (MF)
+		* Mainly used in an unsupervised learning method for latent variable decomposition and dimensionality reduction
+		* Can better deal with scalability and sparsity than Memory-based CF
+
+	4. Deep Learning / Neural Network
+
+
+
+
+Embedding:
+	An embedding is a mapping of a discrete — categorical — variable to a vector of continuous numbers. In the context of neural networks, embeddings are low-dimensional, learned continuous vector representations of discrete variables. Neural network embeddings are useful because they can reduce the dimensionality of categorical variables and meaningfully represent categories in the transformed space.
+		Neural network embeddings have 3 primary purposes:
+	Finding nearest neighbors in the embedding space. These can be used to make recommendations based on user interests or cluster categories.
+	As input to a machine learning model for a supervised task.
+	For visualization of concepts and relations between categories.
+
+
+Steps to implement Model-Based Collaborative Filtering:
+	1. Pre-Processing
+		a. Utility matrix conversion
+			* Generate user-item matrix from the given data. This user-item matrix = utility matrix
+			* This utility matrix is highly sparse because many elements are zero as user hasnot rated all the movies.
+			* If the sparsity value comes out to be around 0.5 or more, then collaborative filtering might not be the best solution. Another important point to note here is that the empty cells actually represent new users and new movies. Therefore, if there is a high proportion of new users then again we might think of using some other recommender methods like content-based filtering or hybrid filtering.
+
+		b. Normalization
+			* Some users(overly positive) have tendency to rate movies always highly and some users(overly negative) have tendency to rate movies always low.
+
+			* So for normalized rating in user rated movies:
+			normalizedrating = globalAvgRating + movie'sAvgRating + user'sAvgRating
+
+	2. Model Training
+		* Starts with the model building process.
+		* For that , generally used method is Matrix Factorisation.
+		 other methods also like Neighbourhood methods.
+
+		*Factorize the user-item matrix to get 2 latent factor matrices — user-factor matrix and 	item-factor matrix.
+			Latent Features:
+				The user ratings are features of the movies that are generated by humans. These features are directly observable things that we assume are important. However, there are also a certain set of features which are not directly observable but are also important in rating predictions. These set of hidden features are called Latent features.
+
+		* Main ways to implement this Matrix Factorisation are as below:
+				a. Alternating Least Squares(ALS)
+				b. Stochastic Gradient Descent(SGD)
+				c. Singular Value Decomposition(SVD)(Only for datasets that are not very large)
+
+	3. Hyperparameter Optimisation
+ 		A popular evaluation metric for recommenders is Precision at K which looks at the top k recommendations and calculates what proportion of those recommendations were actually relevant to a user.
+		Our goal is to find the parameters(model choices, configurations) that give the best precision at K or any other evaluation metric that one wants to optimize. Once the parameters are found, we can re-train our model to get our predicted ratings and we can use these results to generate our recommendations.
+
+	4. Post Processing
+		Order milauney, top ranking rakhney
+
+	5. Evaluation
+		
+
+Difference between implicit and explicit feedbacks in Recommender systems:
+	Explicit Feedbacks are the information that are directly collected from users(such as ratings, number of likes, watch time, count of repetation of videos ,etc) whereas
+	Implicit features are the features that are generated by the machine learning algorithm or Recommendation system itself.
+
+
+In Simple Algorithm for Recommendation(SAR):
+
+	(A)User-Item affinity = weights that describes relation between user and item 
+	(S)item-item similarity = weights that describes user behaviour on different items(for egs: user who bought item1 also bought item2....rows and columns have item ,not user)
+		final prediction matrix = R
+			R=SA
+
+
+Selection of similarity metric
+Some helpful cues while selecting similarity metric are-
+	·Use Pearson when your data is subject to user-bias/ different ratings scales of users
+	·Use Cosine, if data is sparse (many ratings are undefined)
+	·Use Euclidean, if your data is not sparse and the magnitude of the attribute values is significant
+	·Use adjusted cosine for Item-based approach to adjust for user-bias
+
+To get list of index(position) of rows that satisfy the condition in pandas:
+	df.index[df['column name'] == True].tolist()
+
+To get the index(position) of the first rows that satisfies the condition in pandas:
+	df.index[df['column name'] == True].tolist()

@@ -1,0 +1,112 @@
+uname --kernel-name --kernel-release --machine
+
+To which version of Python
+	python3 -V
+	python -V
+
+To Delete a Directory with all its contents:
+	rm -rf dirname
+
+Proper way to install Virtual Environment in ubuntu 18.04:
+	1. apt-get update -y
+	2. apt-get install -y python3-venv
+	3. mkdir project_name
+	4. cd project_name/
+	5. python3 -m venv environment_name
+	6. source ..../environment_name/bin/activate
+	7. update essential packages with pip install -U setuptools pip
+	8. install new packages : pip install termcolor
+	8. deactivate
+
+To Start a virtual environment with all the globle packages included:
+	virtualenv venv_name --system-site-packages
+To activate a virtual environment
+	source ..../venv_name/bin/activate
+To deactivate a virtual environment
+	deactivate
+
+
+Install Sublime text:
+	1.wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
+	2.sudo apt-add-repository "deb https://download.sublimetext.com/ apt/stable/"
+	3.sudo apt install sublime-text
+	4. to open "subl ."
+
+
+
+To list the install packages with their version in the python environment:
+	pip freeze > requirements.txt
+To list the install local packages with their version in the python environment:
+	pip freeze --local > requirements.txt
+
+To install packages from requirements.txt files:
+	pip install -r requirements.txt
+
+Use ll instead of ls to see all hidden files and folders with permissions.
+
+To see all the files starting from a specific character:
+	 ls -d [g]*
+To copy files from one location to another
+	cp -v /home/user1/cp-demo.txt /home/user2
+
+To download file from windows server:
+    Use filezilla
+To download file from Linux server:
+    scp -i deepami.pem ubuntu@ec2-13-127-123-102.ap-south-1.compute.amazonaws.com:/path/to/file
+
+To find size of each directory:
+    du -sh directoryname
+
+To arrange file and folder in the path in descending size:
+    du -h --max-depth=1 | sort -hr
+    
+To see what packages are installed in linux:
+    apt list --installed
+
+    http://3.15.208.152
+    https://us-east-2.console.aws.amazon.com/ec2/home?region=us-east-2#Instances:sort=instanceId
+
+    new Elastic IP : http://18.221.137.201:8080
+
+To copy a folder excluding certain folders:
+	1. Get one step out of the folder you want to copy
+	2.
+		You can use --exclude multiples times.
+		rsync -av --progress sourcefoldername /destinationfolder --exclude thefoldertoexclude --exclude anotherfoldertoexclude
+
+		NOTE: that the dir thefoldertoexclude after --exclude option is relative to the sourcefolder, i.e., sourcefoldername/thefoldertoexclude.
+
+		Also you SHOULD ADD -n for dry run to see what will be copied before performing real operation, and if everything is ok, remove -n from command line.
+
+
+To see background processes:
+	ps aux | grep -i apt
+To kill particular background process:
+	sudo kill <process_id>
+	eg: sudo kill -9 4246
+
+Steps to install vscode:
+	1. sudo apt update
+	2. sudo apt install software-properties-common apt-transport-https wget
+	3. wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
+	4. sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
+	5. sudo apt update
+	6. sudo apt install code
+
+Flask install:
+	1. Create a virtual environment layers
+	2. 
+
+Install tensorflow:
+	1. pip install tensorflow==1.14.0
+	2. to shutdown the warnings of numpy
+		i.  pip uninstall numpy 
+		ii. pip install numpy==1.16.4
+
+Install openCV
+	I used this method of installing OpenCV through pip and it worked:
+		1. pip install opencv-python
+	If you wanna install OpenCv from apt you can do that by using:
+		1. sudo apt install python3-opencv
+
+Install matplotlib:

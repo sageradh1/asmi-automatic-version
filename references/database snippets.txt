@@ -1,0 +1,200 @@
+1. sudo apt-get update
+2. sudo apt-get install postgresql postgresql-contrib
+3. cd /etc/postgresql/
+4. ls to see which version is installed
+5. cd <current_version>/main/
+6. ls and there will be a file called postgresql.config file where postgresql settings are stored
+7. service postgresql status to see if the postgresql is running or not
+8. if postgresql is not running, then service postgresql start
+9. sudo su postgres
+10. psql
+11. \l to see list of databases
+12. \du to see all the users in the postgres
+13. how to change password of default user postgres:
+	ALTER USER postgres WITH PASSWORD 'postgrespassword123';
+14. To create new user :
+	CREATE USER username WITH PASSWORD 'passwordhere';
+    for eg: CREATE USER asmi_group WITH PASSWORD 'asmipassword123';
+
+15. To add superuser priviledge to already created user:
+	ALTER USER username WITH SUPERUSER;
+    for eg: ALTER USER asmi_group WITH SUPERUSER;
+    ALTER USER asmi_group WITH PASSWORD 'asmipassword123';
+
+16. To delete user:
+	DROP USER username
+17. To quit out of current user level in postgres
+	\q
+	exit
+
+After installing postgres, there will be need to install psycopg2 while running db.create_all():
+	pip install psycopg2 will not work
+
+	so do this :
+	sudo apt-get install postgresql postgresql-contrib libpq-dev libssl-dev libffi-dev python3-dev
+	pip install psycopg2
+
+
+To see which user is connected:
+    \conninfo
+To change user:
+    \c - a_new_user
+    The ‘-’ is substitute for current database. You can write this to change database and user:
+    \c a_new_database a_new_user
+
+After user has been created:
+	1. psql --username=asmi_group --password --dbname=asmi_db
+	2. To create database:
+		CREATE DATABASE databasename
+		(\l to check if database has been created.)
+	3.	To create database with owner
+		CREATE DATABASE asmi_db WITH OWNER asmi_group;
+	4.	To enter inside or connect to a database
+		\c databasename
+
+To enter inside a database with specific user:
+    psql asmi_group -h 127.0.0.1 -d asmi_db
+    psql asmi_group -h 127.0.0.1 -d asmi_tiktokclone_db
+
+
+Create backup:
+    SQL formate :
+     pg_dump -h localhost -U "asmi_group" "asmi_db" > "asmi_sqldump.sql"
+    In predefined :
+     pg_dump -h localhost -U "asmi_group" "asmi_db" -Fc > "asmi_dump.backup"
+
+Restore backup:
+	The a new database should already have been created.
+	psql -U asmi_group asmi_tiktokclone_db < /home/sagar/workingDir/asmi-mobapi/asmi_tiktokclone_db.sql
+
+	if peer authentication fails :
+		1. go to /etc/postgresql/10/main/pg_hba.conf
+		2. Change Method of authentication for local to "md5"
+			# TYPE DATABASE USER ADDRESS METHOD
+			local  all      all          peer
+			to
+
+			# TYPE DATABASE USER ADDRESS METHOD
+			local  all      all          md5
+		3. sudo service postgresql restart
+
+	if asmi_group was not created before:
+	1. adduser asmi_group
+	2. Enter password and other data
+
+Important packages:
+	1. pip install Flask-SQLAlchemy
+	2. pip install flask-migrate
+
+
+import flask
+import sqlite3
+
+def request_has_connection():
+    return hasattr(flask.g, 'dbconn')
+
+def get_request_connection():
+    if not request_has_connection():
+        flask.g.dbconn = sqlite3.connect(DATABASE)
+        # Do something to make this connection transactional.
+        # I'm not familiar enough with SQLite to know what that is.
+    return flask.g.dbconn
+
+@app.teardown_request
+def close_db_connection(ex):
+    if request_has_connection():
+        conn = get_request_connection()
+        # Rollback
+        # Alternatively, you could automatically commit if ex is None
+        # and rollback otherwise, but I question the wisdom 
+        # of automatically committing.
+        conn.close()
+
+
+from flask import Flask
+from flask.ext.sqlalchemy import SQLAlchemy
+
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
+db = SQLAlchemy(app)
+
+
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(80), unique=True)
+    email = db.Column(db.String(120), unique=True)
+
+    def __init__(self, username, email):
+        self.username = username
+        self.email = email
+
+    def __repr__(self):
+        return '<User %r>' % self.username
+Now, you can just import/use the User class to access the User table in your database.
+
+Create new users:
+
+>>> from yourapplication import User
+>>> admin = User('admin', 'admin@example.com')
+>>> guest = User('guest', 'guest@example.com')
+Add the users to the database:
+
+>>> db.session.add(admin)
+>>> db.session.add(guest)
+>>> db.session.commit()
+Query for users already in database:
+
+>>> users = User.query.all()
+[<User u'admin'>, <User u'guest'>]
+>>> admin = User.query.filter_by(username='admin').first()
+<User u'admin'>
+
+
+
+
+
+1. There should be import of models:
+    from app.database import models
+2. In models:
+    from app import db
+    ....and (db.model) should be used somewhere in code
+3. In run.py level
+    flask db init
+4. Give name to the migration or change
+    flask db migrate -m "Added Users and Videoposts tables"
+5. flask db upgrade
+
+
+
+
+To see all the tables with certain schema:
+	\dt public.
+		OR
+	SELECT table_name FROM information_schema.tables WHERE table_schema='public';
+
+To see all the columns from a table:
+	\d+ rsvps
+		OR
+	SELECT * FROM api_auth_table;
+
+
+Difference between filter and filter_by:
+	filter_by is used for simple queries on the column names using regular kwargs, like
+	db.users.filter_by(name='Joe')
+
+	The same can be accomplished with filter, not using kwargs, but instead using the '==' equality operator, which has been overloaded on the db.users.name object:
+	db.users.filter(db.users.name=='Joe')
+
+AND Implementation:
+	You can also write more powerful queries using filter, such as expressions like:
+	db.users.filter(or_(db.users.name=='Ryan', db.users.country=='England'))
+	session.query(db.users).filter_by(name='Joe', surname='Dodson')
+
+OR Implementation:
+	session.query(db.users).filter(or_(db.users.name=='Ryan', db.users.country=='England'))
+	session.query(db.users).filter((db.users.name=='Ryan') | (db.users.country=='England'))
+
+Check one of multiple lines:
+	q = session.query(Users).filter(Users.name.in_(['Jack', 'Bob', 'Sandy']))
+	# Below will return True or False
+	at_least_one_user_exists = session.query(q.exists()).scalar()
