@@ -8,8 +8,7 @@ import time
 from datetime import datetime
 import os
 basedir = os.path.abspath(os.path.dirname(__file__))
-
-
+# from PIL import Image
 
 # converting array of frames into Video
 indexOfRequiredFrame=set()
@@ -54,16 +53,29 @@ def frameToVid(indexOfRequiredFrame,originalFrameArray,newframeArray,vOutPath, f
         vOut.write(frame)
     vOut.release()
 
-
-
 options = {
     "model": basedir+"/cfg/yolo.cfg", 
     "load": basedir+"/bin/yolov2.weights", 
-    "threshold": 0.1
+    "threshold": 0.6
     }
 
 tfnet = TFNet(options)
-def extractFrameInfosFromVideo(_videoname):
+
+def image_to_thumbs(img):
+    """Create thumbs from image"""
+    height, width, channels = img.shape
+    thumbs = {"original": img}
+    sizes = [640, 320, 160]
+    for size in sizes:
+        if (width >= size):
+            r = (size + 0.0) / width
+            max_size = (size, int(height * r))
+            thumbs[str(size)] = cv2.resize(img, max_size, interpolation=cv2.INTER_AREA)
+    return thumbs
+
+
+
+def extractFrameInfosFromVideo(_videoname,selected_option):
 
     capture = cv2.VideoCapture(app.config["VIDEO_UPLOADS_FOLDER"]+"/"+_videoname)
 
@@ -111,12 +123,28 @@ def extractFrameInfosFromVideo(_videoname):
             print("Frame number : {:d} TimeStamp: {:f}".format(framecounter,frame_msec))
             #print("Frame No \t Objects Count \t Object Label \t Confidence ")        
             results = tfnet.return_predict(frame)
-            # print("Results : ",results)
-            listOfResultsWithTuple.append((results,frame_msec))
-            listOfResultsWithoutTuple.append(results)
-            #print(results)
+            print("Results : ",results)
 
+
+            new_result = []
             for eachObject in results:
+                # print("The selected option is {} and the detected object is {}".format(selected_option,eachObject['label']))
+
+                if eachObject['label']==selected_option:
+                    new_result.append(eachObject.copy())
+
+            listOfResultsWithTuple.append((new_result,frame_msec))
+            listOfResultsWithoutTuple.append(new_result)
+
+            # if framecounter==30:
+            #     thumb = image_to_thumbs(frame)
+            #     # os.makedirs(app.config['THUMBNAIL_FOR_UPLOADED_VIDEO_FOLDER'])
+            #     for k, v in thumb.items():
+            #         print("In 30th frame , the value of k is {}".format(k))
+            #         cv2.imwrite(app.config['THUMBNAIL_FOR_UPLOADED_VIDEO_FOLDER']+'/'+str(k)+'.png' , v)
+
+
+            for eachObject in new_result:
 
                 tl = (eachObject['topleft']['x'],eachObject['topleft']['y'])
                 br = (eachObject['bottomright']['x'],eachObject['bottomright']['y'])
@@ -127,21 +155,50 @@ def extractFrameInfosFromVideo(_videoname):
                 iconWidth = int (0.2*rectFrameWidth)
                 iconHeight = int (0.2*rectFrameHeight)
 
-
                 # iconWidth = 40
                 # iconHeight = 40
 
                 if iconWidth==0 or iconHeight==0:
-                    continue
-                icon_img = cv2.imread(basedir +"/icon6.png")
-                icon_img1= cv2.resize(icon_img, (iconWidth,iconHeight))
-                
-                x_offset=br[0]-iconWidth
-                y_offset=int((tl[1]+br[1])/2)-iconHeight
-                frame[y_offset:y_offset+icon_img1.shape[0], x_offset:x_offset+icon_img1.shape[1]] = icon_img1
-                
-                #frame = cv2.putText(frame, "", tl, cv2.FONT_HERSHEY_COMPLEX, 1.0, (255, 255, 255), 0)
-                #frame = cv2.rectangle(frame, tl, br, (255, 255, 255),2)
+                    continue            
+
+                isRequiredObjectDetected = False
+
+                if eachObject['label']=="bottle":
+                    icon_img = cv2.imread(app.config["ADIMAGE_UPLOADS_FOLDER"] +"/cup.png")
+                    isRequiredObjectDetected = True
+                elif eachObject['label']=="dog":
+                    icon_img = cv2.imread(app.config["ADIMAGE_UPLOADS_FOLDER"] +"/dogfood.png")
+                    isRequiredObjectDetected = True
+                elif eachObject['label']=="car":
+                    icon_img = cv2.imread(app.config["ADIMAGE_UPLOADS_FOLDER"] +"/tesla.png")
+                    isRequiredObjectDetected = True
+                elif eachObject['label']=="sofa":
+                    icon_img = cv2.imread(app.config["ADIMAGE_UPLOADS_FOLDER"] +"/furniture.png")
+                    isRequiredObjectDetected = True
+                elif eachObject['label']=="motorbike":
+                    icon_img = cv2.imread(app.config["ADIMAGE_UPLOADS_FOLDER"] +"/suzuki.png")
+                    isRequiredObjectDetected = True
+                elif eachObject['label']=="person":
+                    icon_img = cv2.imread(app.config["ADIMAGE_UPLOADS_FOLDER"] +"/amazon.png")
+                    isRequiredObjectDetected = True
+                elif eachObject['label']=="tie":
+                    icon_img = cv2.imread(app.config["ADIMAGE_UPLOADS_FOLDER"] +"/suzuki.png")
+                    isRequiredObjectDetected = True
+
+                if isRequiredObjectDetected:
+                    icon_img1= cv2.resize(icon_img, (iconWidth,iconHeight))
+                    
+                    # else:
+                    #     icon_img = cv2.imread(app.config["ADIMAGE_UPLOADS_FOLDER"] +"/amazon.png")
+                    #     icon_img1= cv2.resize(icon_img, (iconWidth,iconHeight))
+
+                    # icon_img = cv2.imread(basedir +"/icon6.png")
+                    # icon_img1= cv2.resize(icon_img, (iconWidth,iconHeight))
+
+                    x_offset=br[0]-iconWidth
+                    y_offset=int((tl[1]+br[1])/2)-iconHeight
+                    frame[y_offset:y_offset+icon_img1.shape[0], x_offset:x_offset+icon_img1.shape[1]] = icon_img1
+
             newframeArray.append(frame)
             originalFrameArray.append(originalFrame)            
             # frame = cv2.rectangle(frame, tl, br, color, 7)
@@ -156,9 +213,9 @@ def extractFrameInfosFromVideo(_videoname):
             print("\nlistOfResultsWithoutTuple")
             print(listOfResultsWithoutTuple)
 
-
             #frameToVid(originalFrameArray,newframeArray,app.config['VIDEO_GENERATED_FOLDER']+"/"+generatedVideoFilename,fps)
             return listOfResultsWithTuple,listOfResultsWithoutTuple,originalFrameArray,newframeArray,fps
+
     print("Outside loop")
     return listOfResultsWithTuple,listOfResultsWithoutTuple,originalFrameArray,newframeArray,fps
 

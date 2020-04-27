@@ -1,6 +1,0 @@
-to make jenkins user use sudo rights:
-	1. sudo visudo
-	2. Add this line below:
-		jenkins ALL=(ALL) NOPASSWD: ALL
-
-		

@@ -98,7 +98,18 @@ def home():
 	except:
 		latestvideoid=-1
 	view_video_url=request.url_root+str(url_for('viewvideos'))[1:]+"?userid="+str(userid)+"&videoid="+str(latestvideoid)
-	return render_template('normal_views/home.html', view_video_url=view_video_url)
+	return render_template('demo_views/home.html', view_video_url=view_video_url)
+
+
+@app.route('/uploaded')
+@login_required
+def uploaded():
+	return render_template('demo_views/uploaded.html')
+
+@app.route('/analytics')
+@login_required
+def analytics():
+	return render_template('demo_views/analytics.html')
 
 
 @app.route('/viewvideos')

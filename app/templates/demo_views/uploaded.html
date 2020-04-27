@@ -89,7 +89,7 @@
 </head>
 
 <div class="mybody">
-  <header style="height: 65px;">
+<header style="height: 65px;">
   <!--  Remove dark nav  -->
   <nav class="nav dark-nav">
     <div class="container">
@@ -111,7 +111,7 @@
               <button class="dropbtn">Contents</button>
               <div class="dropdown-content">
                 <a href="{{ url_for('uploaded')}}">Uploaded Video</a>
-                <!-- <a href="Generated.html">Generated Video</a> -->
+
                 <a href="{{ url_for('analytics')}}">Analytics Files</a>
               </div>
           </li>
@@ -130,7 +130,7 @@
           {% else %}
             <li><a href="{{ url_for('login')}}">Login</a></li>
             <li><a href="{{ url_for('register')}}">Signup</a></li>
-          {% endif %}  
+          {% endif %}
 
           </div>
         </ul>

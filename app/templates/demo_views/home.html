@@ -105,11 +105,6 @@
 
 </style>
 
-
-<!--end-->
-
-<!--end-->
-
 <header style="height: 65px;">
   <!--  Remove dark nav  -->
   <nav class="nav dark-nav">
@@ -132,7 +127,7 @@
               <button class="dropbtn">Contents</button>
               <div class="dropdown-content">
                 <a href="{{ url_for('uploaded')}}">Uploaded Video</a>
-                <!-- <a href="Generated.html">Generated Video</a> -->
+
                 <a href="{{ url_for('analytics')}}">Analytics Files</a>
               </div>
           </li>
@@ -141,13 +136,22 @@
             <div class="dropdown" style="float:right;">
               <button class="dropbtn">TestAPI</button>
               <div class="dropdown-content">
-                <a href="#">Upload Video</a>
-                <a href="{{ url_for('demoviewvideos')}}">View Video</a>
+                <a href="{{ url_for('upload')}}">Upload Video</a>
+                <a href="{{ url_for('viewvideos_jabir')}}">View Video</a>
               </div>
             </div>
           </li>
 
-           <li><a href="{{ url_for('logout')}}">Logout</a></li>
+          <li>
+            <div class="dropdown" style="float:right;">
+              <button class="dropbtn">Setting</button>
+              <div class="dropdown-content">
+                <a href="{{ url_for('logout')}}">Logout</a>
+                
+                </div>
+            </div>
+          </li>
+
           {% else %}
             <li><a href="{{ url_for('login')}}">Login</a></li>
             <li><a href="{{ url_for('register')}}">Signup</a></li>

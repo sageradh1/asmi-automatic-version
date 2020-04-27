@@ -1,0 +1,57 @@
+{
+	"dataPerObject":[
+		{
+		"ItemName":"Oreo",
+		"ImageUrl":"http://18.221.137.201/static/img/ad-images/oreo.png",
+		"IconUrl": "http://18.221.137.201/static/img/ad-images/oreo.png",
+		"Price":4.09,
+		"Platform":"Reliance Retail"
+		},
+		{
+		"ItemName":"Shirt",
+		"ImageUrl":"https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSpdK7GAaXWvu_HdWAPIlR36d87UiaOaUs-knZGF05KTArNymMp",
+		"IconUrl": "http://18.221.137.201/static/img/ad-images/raymondpng.png",
+		"Price":20.00,
+		"Platform":"Reliance Retail"
+		},
+		{
+		"ItemName":"Lenskart",
+		"ImageUrl":"http://18.221.137.201/static/img/ad-images/lenskart.png",
+		"IconUrl": "http://18.221.137.201/static/img/ad-images/lenskart.png",
+		"Price":30.00,
+		"Platform":"Reliance Retail"
+		},
+		{
+		"ItemName":"Tie",
+		"ImageUrl":"http://18.221.137.201/static/img/ad-images/gucci.png",
+		"IconUrl": "http://18.221.137.201/static/img/ad-images/gucci.png",
+		"Price":7.00,
+		"Platform":"Reliance Retail"
+		},
+		{
+		"ItemName":"Watch",
+		"ImageUrl":"http://18.221.137.201/static/img/ad-images/titan.png",
+		"IconUrl": "http://18.221.137.201/static/img/ad-images/titan.png",
+		"Price":100.00,
+		"Platform":"Reliance Retail"
+		},
+
+		{
+		"ItemName":"Mic",
+		"ImageUrl":"http://18.221.137.201/static/img/ad-images/miclogo.png",
+		"IconUrl": "http://18.221.137.201/static/img/ad-images/miclogo.png",
+		"Price":90.00,
+		"Platform":"Reliance Retail"
+		}
+	],
+
+	"dataPerTimestamp":[
+		{"timeInMilliSec": 94000.0, "objectsWithCoordinates": [{"label": "Shirt", "allCoordinates": [{"x": 470, "y": 472}]}]},{"timeInMilliSec": 96000.0, "objectsWithCoordinates": [{"label": "Shirt", "allCoordinates": [{"x": 465, "y": 464}]}]},{"timeInMilliSec": 98000.0, "objectsWithCoordinates": [{"label": "Shirt", "allCoordinates": [{"x": 470, "y": 472}]}]},
+		{"timeInMilliSec": 134400.0, "objectsWithCoordinates": [{"label": "Lenskart", "allCoordinates": [{"x": 533, "y": 210}]}]}, {"timeInMilliSec": 135000.0, "objectsWithCoordinates": [{"label": "Lenskart", "allCoordinates": [{"x": 500, "y": 200}]}]},
+		{"timeInMilliSec": 11000.0, "objectsWithCoordinates": [{"label": "Mic", "allCoordinates": [{"x": 561, "y": 390}]}]}, {"timeInMilliSec": 17091.666666666664, "objectsWithCoordinates": [{"label": "Mic", "allCoordinates": [{"x": 571, "y": 380}]}]},{"timeInMilliSec": 17501.666666666664, "objectsWithCoordinates": [{"label": "Mic", "allCoordinates": [{"x": 571, "y": 380}]}]},
+		{"timeInMilliSec": 12000.0, "objectsWithCoordinates": [{"label": "Watch", "allCoordinates": [{"x": 899, "y": 490}]}]}, {"timeInMilliSec": 17750.0, "objectsWithCoordinates": [{"label": "Watch", "allCoordinates": [{"x": 907, "y": 499}]}]}, 
+		{"timeInMilliSec": 19000.0, "objectsWithCoordinates": [{"label": "Tie", "allCoordinates": [{"x": 662, "y": 342}]}]}, {"timeInMilliSec": 19291.666666666664, "objectsWithCoordinates": [{"label": "Tie", "allCoordinates": [{"x": 675, "y": 342}]}]}, {"timeInMilliSec": 19000.0, "objectsWithCoordinates": [{"label": "Tie", "allCoordinates": [{"x": 662, "y": 342}]}]},  {"timeInMilliSec": 22000.0, "objectsWithCoordinates": [{"label": "Tie", "allCoordinates": [{"x": 662, "y": 342}]}]},{"timeInMilliSec": 22500, "objectsWithCoordinates": [{"label": "Tie", "allCoordinates": [{"x": 675, "y": 342}]}]}, {"timeInMilliSec": 23000.0, "objectsWithCoordinates": [{"label": "Tie", "allCoordinates": [{"x": 675, "y": 342}]}]}, {"timeInMilliSec": 23591.666666666664, "objectsWithCoordinates": [{"label": "Tie", "allCoordinates": [{"x": 675, "y": 342}]}]}, {"timeInMilliSec": 24000.0, "objectsWithCoordinates": [{"label": "Tie", "allCoordinates": [{"x": 662, "y": 342}]}]}, {"timeInMilliSec": 24391.666666666664, "objectsWithCoordinates": [{"label": "Tie", "allCoordinates": [{"x": 675, "y": 342}]}]}, {"timeInMilliSec": 25091.666666666664, "objectsWithCoordinates": [{"label": "Tie", "allCoordinates": [{"x": 675, "y": 342}]}]}, {"timeInMilliSec": 25500.0, "objectsWithCoordinates": [{"label": "Tie", "allCoordinates": [{"x": 662, "y": 342}]}]}, {"timeInMilliSec": 26500.0, "objectsWithCoordinates": [{"label": "Tie", "allCoordinates": [{"x": 662, "y": 342}]}]},{"timeInMilliSec": 27000.0, "objectsWithCoordinates": [{"label": "Tie", "allCoordinates": [{"x": 662, "y": 342}]}]},
+		{"timeInMilliSec": 38000.0, "objectsWithCoordinates": [{"label": "Oreo", "allCoordinates": [{"x": 720, "y": 510}]}]},{"timeInMilliSec": 38166.666666666664, "objectsWithCoordinates": [{"label": "Oreo", "allCoordinates": [{"x": 720, "y": 510}]}]}, {"timeInMilliSec": 38250.0, "objectsWithCoordinates": [{"label": "Oreo", "allCoordinates": [{"x": 720, "y": 510}]}]}, {"timeInMilliSec": 38291.666666666664, "objectsWithCoordinates": [{"label": "Oreo", "allCoordinates": [{"x": 720, "y": 510}]}]}, {"timeInMilliSec": 38333.33333333333, "objectsWithCoordinates": [{"label": "Oreo", "allCoordinates": [{"x": 720, "y": 510}]}]}, {"timeInMilliSec": 38375.0, "objectsWithCoordinates": [{"label": "Oreo", "allCoordinates": [{"x": 720, "y": 510}]}]}, {"timeInMilliSec": 38416.666666666664, "objectsWithCoordinates": [{"label": "Oreo", "allCoordinates": [{"x": 720, "y": 510}]}]}, {"timeInMilliSec": 38458.33333333333, "objectsWithCoordinates": [{"label": "Oreo", "allCoordinates": [{"x": 720, "y": 510}]}]}, {"timeInMilliSec": 38500.0, "objectsWithCoordinates": [{"label": "Oreo", "allCoordinates": [{"x": 720, "y": 510}]}]}, {"timeInMilliSec": 38541.666666666664, "objectsWithCoordinates": [{"label": "Oreo", "allCoordinates": [{"x": 720, "y": 510}]}]}, {"timeInMilliSec": 38583.33333333333, "objectsWithCoordinates": [{"label": "Oreo", "allCoordinates": [{"x": 720, "y": 510}]}]}, {"timeInMilliSec": 38625.0, "objectsWithCoordinates": [{"label": "Oreo", "allCoordinates": [{"x": 720, "y": 510}]}]}, {"timeInMilliSec": 38666.666666666664, "objectsWithCoordinates": [{"label": "Oreo", "allCoordinates": [{"x": 720, "y": 510}]}]}, {"timeInMilliSec": 38708.33333333333, "objectsWithCoordinates": [{"label": "Oreo", "allCoordinates": [{"x": 720, "y": 510}]}]}, {"timeInMilliSec": 38750.0, "objectsWithCoordinates": [{"label": "Oreo", "allCoordinates": [{"x": 720, "y": 510}]}]}, {"timeInMilliSec": 38791.666666666664, "objectsWithCoordinates": [{"label": "Oreo", "allCoordinates": [{"x": 720, "y": 510}]}]}
+	]
+
+}

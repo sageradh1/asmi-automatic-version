@@ -28,11 +28,17 @@ def labels(meta, FLAGS):
     else:
         file = FLAGS.labels
         if model in coco_models:
-            print("Model has a coco model name, loading coco labels.")
+            print("Model has a coco model name, loading coco labels")
+            
+            #Sagar commented this line 
             file = os.path.join(FLAGS.config, coco_names)
+
+
         elif model == 'yolo9000':
             print("Model has name yolo9000, loading yolo9000 labels.")
             file = os.path.join(FLAGS.config, nine_names)
+
+      
         with open(file, 'r') as f:
             meta['labels'] = list()
             labs = [l.strip() for l in f.readlines()]

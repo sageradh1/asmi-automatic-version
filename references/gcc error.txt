@@ -1,5 +1,0 @@
-unable to execute 'x86_64-linux-gnu-gcc': No such file or directory
-	pip install build-essential autoconf libtool pkg-config libgle3 python-dev
-
-fatal error: Python.h: No such file or directory
-	sudo apt-get install python3-dev

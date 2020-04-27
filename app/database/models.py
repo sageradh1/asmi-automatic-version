@@ -63,7 +63,7 @@ class UploadedVideo(db.Model):
     storagelocation = db.Column(db.String(500))
     uploadStartedTime = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     uploadCompletedTime = db.Column(db.DateTime, index=True, default=datetime.utcnow)    
-    detected_objects_withconfidence=db.Column(db.String(1000))
+    detected_objects_withconfidence=db.Column(db.String(2000))
     uploader_id =  db.Column(db.Integer)
     analyticsFile = db.relationship('VideoAnalyticsFile', backref='videoFile', lazy='dynamic')
 
@@ -155,8 +155,10 @@ class MergedAdCategory(db.Model):
     adseller = db.Column(db.String(200))
     adprice = db.Column(db.Numeric(5,2),nullable=False)
     adimage_url = db.Column(db.String(500),nullable=False)
+    image_filename= db.Column(db.String(500))
     adinitial_quantity = db.Column(db.Integer)
     adleft_quantity = db.Column(db.Integer)
+    is_active = db.Column(db.Boolean, unique=False, default=True)
 
     def __repr__(self):
         return '<MergedAdCategory adcategoryid:{}  category_name:{} adtitle:{} adprice:{} createdTime:{}  >'.format(self.id,self.category_name,self.adtitle,self.adprice,self.createdTime) 

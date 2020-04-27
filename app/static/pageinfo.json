@@ -1,0 +1,45 @@
+{
+	"current_video_info":{
+		        "videoid" : 0,
+		        "videoname" : "Devstories from google",
+		        "source" : "https://www.html5rocks.com/en/tutorials/vvideoideo/basics/devstories.mp4",
+		        "duration" : "4:34",
+		        "thumbnailurl" : "https://lonelyplanetstatic.thumbnailurlix.net/op-vvideoideo-sync/images/production/p-5810396717001-brightcove-when-to-go-to-the-azores-20180726-050333.jpg?w=160&h=90&sharp=10&q=50",
+		        "current_video_json":"http://18.221.137.201/static/analyticsFolder/generated/demo-raw1.json"
+		    },
+	
+	"side_playlist_info":[
+			{
+		       "videoid" : 1,
+		        "videoname" : "Vvideoida marina - Oceano",
+		        "source" : "http://mirrors.standaloneinstaller.com/vvideoideo-sample/jellyfish-25-mbps-hd-hevc.mp4",
+		        "duration" : "4:34",
+		        "thumbnailurl" : "https://lonelyplanetstatic.thumbnailurlix.net/op-vvideoideo-sync/images/production/p-5810396717001-brightcove-when-to-go-to-the-azores-20180726-050333.jpg?w=160&h=90&sharp=10&q=50"   
+		    },{
+		        "videoid":2,
+		        "videoname" : "Profundvideoidades del oceano",
+		        "source" : "http://thenewcode.com/assets/vvideoideos/ocean-small.mp4",
+		        "duration" : "1:34",
+		        "thumbnailurl" : "https://lonelyplanetstatic.thumbnailurlix.net/op-vvideoideo-sync/images/production/p-5810396717001-brightcove-when-to-go-to-the-azores-20180726-050333.jpg?w=160&h=90&sharp=10&q=50"
+		    },{
+		        "videoid": 3,
+		        "videoname" : "Lo angeles timelapse",
+		        "source" : "http://thenewcode.com/assets/vvideoideos/downtown-los-angeles.mp4",
+		        "duration" : "3:34",
+		        "thumbnailurl" : "https://lonelyplanetstatic.thumbnailurlix.net/op-vvideoideo-sync/images/production/p-5810396717001-brightcove-when-to-go-to-the-azores-20180726-050333.jpg?w=160&h=90&sharp=10&q=50"
+		    },{
+		        "videoid" : 4,
+		        "videoname" : "Panasonic test vvideoideo HD",
+		        "source" : "http://mirrors.standaloneinstaller.com/vvideoideo-sample/Panasonic_HDC_TM_700_P_50i.mp4",
+		        "duration" : "2:34",
+		        "thumbnailurl" : "https://lonelyplanetstatic.thumbnailurlix.net/op-vvideoideo-sync/images/production/p-5810396717001-brightcove-when-to-go-to-the-azores-20180726-050333.jpg?w=160&h=90&sharp=10&q=50"
+		    },
+		    {
+		        "videoid" : 5,
+		        "videoname" : "Devstories from google",
+		        "source" : "https://www.html5rocks.com/en/tutorials/vvideoideo/basics/devstories.mp4",
+		        "duration" : "4:34",
+		        "thumbnailurl" : "https://lonelyplanetstatic.thumbnailurlix.net/op-vvideoideo-sync/images/production/p-5810396717001-brightcove-when-to-go-to-the-azores-20180726-050333.jpg?w=160&h=90&sharp=10&q=50"
+		    }
+		]
+}
